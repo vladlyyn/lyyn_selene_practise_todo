@@ -28,7 +28,33 @@ def test_complete_todo():
     # всё можно записать в одну строку
     browser.all('#todo-list>li').should(have.exact_texts('a!', 'b!', 'c!'))
     # browser.all('#odo-list>li').second.element('[type="checkbox"]').click()
-    browser.all('#todo-list>li').element_by(have.exact_text('b!')).element('[type="checkbox"]').click()
+
+    (browser.all('#todo-list>li').element_by(have.exact_text('b!')).element('[type="checkbox"]').click())
+    # browser.all('#odo-list>li').by(have.css_class('"form-check-label col-10"')).should(have.exact_text('b!'))
+
+    completed = browser.all('//li[.//s]')
+    completed.should(have.size(1))
+    completed.first.should(have.text('b!'))
+
+#browser.all('#odo-list>li').by(have.css_class(‘completed’))
+# css класс должен содержать определенный текст:
+#browser.all('#odo-list>li').element_by(have.css_class(‘completed’)).should(have.exact_texts('b!'))
+#browser.all('#odo-list>li').by(have.css_class(‘completed’)).should(have.exact_texts('b!'))
+#browser.all('#odo-list>li').by(have.no.css_class(‘completed’)).should(have.exact_texts('a!', 'c!'))
+
+# xpass для клика на чекбокс
+#browser.element('//li[.//s]').click()
+
+def test_title_placing():
+    browser.open('/')
+    if browser.wait_until(have.title('To do - простой список дел онлайн')):
+        print('NICE!')
+    else:
+        print('SO BAD :(')
+
+
+
+
 
 
 
